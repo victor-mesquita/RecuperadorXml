@@ -23,7 +23,23 @@ namespace WindowsFormsApplication1
 
         private void Load_Captcha(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            GetCaptcha();
+            if (page.ReadyState == WebBrowserReadyState.Complete)
+            {
+                HtmlDocument htmldoc = (HtmlDocument)page.Document;
+                HtmlElementCollection htmlElementCollection = htmldoc.Images;
+                foreach (HtmlElement ele in htmlElementCollection)
+                {
+
+                    if (ele.Id == "ctl00_ContentPlaceHolder1_imgCaptcha")
+                    {
+                        imgUrl = ele.GetAttribute("src");
+                        imgUrl = imgUrl.Substring(22, imgUrl.Length - 22);
+                        pictureBox1.Image = Base64ToImage(imgUrl);
+
+                    }
+                }
+
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -34,11 +50,9 @@ namespace WindowsFormsApplication1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //page.Refresh();
+           clearScr();
 
-            //clearScr();
-
-            //GetCaptcha();
+            GetCaptcha();
             
         }
 
@@ -84,9 +98,10 @@ namespace WindowsFormsApplication1
 
         }
         private void checkAKey(string ack) {
-            if(ack != null && ack.Length > 0)
+            EnterSite();
+            if (ack != null && ack.Length > 0)
             {
-
+                
             }
             else
             {
@@ -103,26 +118,20 @@ namespace WindowsFormsApplication1
                 label2.ForeColor = Color.Black;
                 label2.Text = "Digite o valor ao lado";
             }
-
-            if (pictureBox1.Image != null)
-            {
-                pictureBox1.Image.Dispose();
-                pictureBox1.Image = null;
-            }
         }
 
-        private void downloadXml()
+        private void EnterSite()
         {
             HtmlDocument htmldoc = (HtmlDocument)page.Document;
-            HtmlElementCollection htmlElementCollection = htmldoc.GetElementsByTagName("input");
+            HtmlElementCollection htmlElementCollection = htmldoc.Forms;
             foreach (HtmlElement ele in htmlElementCollection)
             {
+                ele.InvokeMember("submit");
 
-                if (ele.GetAttribute("name") == "ctl00$ContentPlaceHolder1$btnConsultar")
-                {
-                    ele.InvokeMember("javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(\"ctl00$ContentPlaceHolder1$btnConsultar\", \"\", true, \"completa\", \"\", false, false))");
-                }
             }
+            //Em testes
+            /*string enterScript = @"javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions('ctl00$ContentPlaceHolder1$btnConsultar', '', true, 'completa', '', false, false))";
+            page.Document.InvokeScript("eval", new object[] { enterScript });*/
         }
 
         private void label1_Click(object sender, EventArgs e)
