@@ -1,0 +1,9 @@
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\RecuperadorXml\RecuperadorXml\bin\Debug\WindowsFormsApplication1.exe.config
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\RecuperadorXml\RecuperadorXml\obj\Debug\WindowsFormsApplication1.exe
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\RecuperadorXml\RecuperadorXml\obj\Debug\WindowsFormsApplication1.pdb
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\RecuperadorXml\RecuperadorXml\bin\Debug\WindowsFormsApplication1.exe
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\RecuperadorXml\RecuperadorXml\bin\Debug\WindowsFormsApplication1.pdb
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\RecuperadorXml\RecuperadorXml\obj\Debug\RecuperadorXml.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\RecuperadorXml\RecuperadorXml\obj\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\RecuperadorXml\RecuperadorXml\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\RecuperadorXml\RecuperadorXml\obj\Debug\RecuperadorXml.csproj.GenerateResource.Cache
