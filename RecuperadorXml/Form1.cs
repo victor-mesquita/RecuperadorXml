@@ -34,11 +34,12 @@ namespace WindowsFormsApplication1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            page.Refresh();
+            //page.Refresh();
 
-           // clearScr();
+            //clearScr();
 
-            GetCaptcha();
+            //GetCaptcha();
+            
         }
 
 
@@ -59,6 +60,7 @@ namespace WindowsFormsApplication1
         //Obtem o captcha
         private void GetCaptcha()
         {
+            /*
             if (page.ReadyState == WebBrowserReadyState.Complete)
             {
                 HtmlDocument htmldoc = (HtmlDocument)page.Document;
@@ -75,8 +77,11 @@ namespace WindowsFormsApplication1
                     }
                 }
 
-            }
-            
+            }*/
+            string ReloadScript = @"javascript:__doPostBack('ctl00$ContentPlaceHolder1$hlkAlterarCaptcha','')";
+
+            page.Document.InvokeScript("eval", new object[] { ReloadScript });
+
         }
         private void checkAKey(string ack) {
             if(ack != null && ack.Length > 0)
