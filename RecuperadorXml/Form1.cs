@@ -21,17 +21,24 @@ namespace WindowsFormsApplication1
             InitializeComponent();
         }
 
+        private void Load_Captcha(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            GetCaptcha();
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             page.Navigate(nfeUrl);
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             page.Refresh();
 
+           // clearScr();
+
             GetCaptcha();
-           
         }
 
 
@@ -67,10 +74,50 @@ namespace WindowsFormsApplication1
 
                     }
                 }
+
             }
+            
         }
         private void checkAKey(string ack) {
+            if(ack != null && ack.Length > 0)
+            {
 
+            }
+            else
+            {
+                label2.ForeColor = Color.Red;
+                label2.Text = "Chave de Acesso inválida!";
+
+            }
+        }
+
+        private void clearScr()
+        {
+            if(label2.Text != "Digite o valor ao lado")
+            {
+                label2.ForeColor = Color.Black;
+                label2.Text = "Digite o valor ao lado";
+            }
+
+            if (pictureBox1.Image != null)
+            {
+                pictureBox1.Image.Dispose();
+                pictureBox1.Image = null;
+            }
+        }
+
+        private void downloadXml()
+        {
+            HtmlDocument htmldoc = (HtmlDocument)page.Document;
+            HtmlElementCollection htmlElementCollection = htmldoc.GetElementsByTagName("input");
+            foreach (HtmlElement ele in htmlElementCollection)
+            {
+
+                if (ele.GetAttribute("name") == "ctl00$ContentPlaceHolder1$btnConsultar")
+                {
+                    ele.InvokeMember("javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(\"ctl00$ContentPlaceHolder1$btnConsultar\", \"\", true, \"completa\", \"\", false, false))");
+                }
+            }
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -81,6 +128,39 @@ namespace WindowsFormsApplication1
         private void label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            checkAKey(textBox1.Text);
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            HtmlDocument htmldoc = (HtmlDocument)page.Document;
+            HtmlElementCollection htmlElementCollection = htmldoc.GetElementsByTagName("input");
+            foreach (HtmlElement ele in htmlElementCollection)
+            {
+
+                if (ele.GetAttribute("name") == "ctl00$ContentPlaceHolder1$txtChaveAcessoCompleta")
+                {
+                    ele.SetAttribute("value", textBox1.Text);
+                }
+            }
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            HtmlDocument htmldoc = (HtmlDocument)page.Document;
+            HtmlElementCollection htmlElementCollection = htmldoc.GetElementsByTagName("input");
+            foreach (HtmlElement ele in htmlElementCollection)
+            {
+
+                if (ele.GetAttribute("name") == "ctl00$ContentPlaceHolder1$txtCaptcha")
+                {
+                    ele.SetAttribute("value", textBox2.Text);
+                }
+            }
         }
     }
 }

@@ -47,6 +47,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "Download XML";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -60,11 +61,12 @@
             // 
             // page
             // 
-            this.page.Location = new System.Drawing.Point(6700, 103);
+            this.page.Location = new System.Drawing.Point(442, 12);
             this.page.MinimumSize = new System.Drawing.Size(20, 20);
             this.page.Name = "page";
-            this.page.Size = new System.Drawing.Size(99, 39);
+            this.page.Size = new System.Drawing.Size(412, 130);
             this.page.TabIndex = 2;
+            this.page.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.Load_Captcha);
             // 
             // pictureBox1
             // 
@@ -81,6 +83,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(415, 20);
             this.textBox1.TabIndex = 5;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label1
             // 
@@ -98,6 +101,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(184, 20);
             this.textBox2.TabIndex = 7;
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label2
             // 
@@ -113,7 +117,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(436, 154);
+            this.ClientSize = new System.Drawing.Size(880, 154);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label1);
