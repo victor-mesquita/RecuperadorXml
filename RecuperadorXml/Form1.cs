@@ -14,7 +14,7 @@ namespace WindowsFormsApplication1
     public partial class Form1 : Form
     {
         private string imgUrl = "";
-        private string nfeUrl = "http://www.nfe.fazenda.gov.br/portal/consulta.aspx?tipoConsulta=completa";
+        private string nfeUrl = "http://www.nfe.fazenda.gov.br/portal/consulta.aspx?tipoConsulta=completa&tipoConteudo=XbSeqxE8pl8=";
 
         public Form1()
         {
@@ -25,7 +25,7 @@ namespace WindowsFormsApplication1
         {
             if (page.ReadyState == WebBrowserReadyState.Complete)
             {
-                HtmlDocument htmldoc = (HtmlDocument)page.Document;
+                HtmlDocument htmldoc = page.Document;
                 HtmlElementCollection htmlElementCollection = htmldoc.Images;
                 foreach (HtmlElement ele in htmlElementCollection)
                 {
@@ -50,10 +50,8 @@ namespace WindowsFormsApplication1
 
         private void button2_Click(object sender, EventArgs e)
         {
-           clearScr();
-
+            clearScr();
             GetCaptcha();
-            
         }
 
 
@@ -97,17 +95,27 @@ namespace WindowsFormsApplication1
             page.Document.InvokeScript("eval", new object[] { ReloadScript });
 
         }
-        private void checkAKey(string ack) {
-            EnterSite();
-            if (ack != null && ack.Length > 0)
-            {
-                
-            }
-            else
-            {
-                label2.ForeColor = Color.Red;
-                label2.Text = "Chave de Acesso inválida!";
+        private void checkKey(TextBox ack) {
 
+            if (ack.Text.Length < 44 || ack.Text.Length > 44)
+            {
+                SetError(4);
+            }
+            if(ack.Text.Length == 0)
+            {
+                SetError(0);
+            }
+        }
+
+        private void checkCaptcha(TextBox cpt)
+        {
+            if(cpt.Text.Length == 0)
+            {
+                SetError(1);
+            }
+            if(cpt.Text.Length < 6 && cpt.Text.Length > 0)
+            {
+                SetError(2);
             }
         }
 
@@ -118,21 +126,89 @@ namespace WindowsFormsApplication1
                 label2.ForeColor = Color.Black;
                 label2.Text = "Digite o valor ao lado";
             }
+
+            if(page.Url.ToString() != nfeUrl)
+                page.Navigate(nfeUrl);
+
+            
         }
 
         private void EnterSite()
         {
-            HtmlDocument htmldoc = (HtmlDocument)page.Document;
-            HtmlElementCollection htmlElementCollection = htmldoc.Forms;
-            foreach (HtmlElement ele in htmlElementCollection)
+            HtmlDocument htmldoc = page.Document;
+            HtmlElementCollection htmlElementCollection = htmldoc.GetElementsByTagName("input");
+            foreach (HtmlElement element in htmlElementCollection)
             {
-                ele.InvokeMember("submit");
-
+                /*if(ele.GetAttribute("name") == "ctl00$ContentPlaceHolder1$btnConsultar")
+                {
+                    ele.InvokeMember("submit");
+                }*/
+                Console.WriteLine(element.Name);
+                if (element.Name.Equals("ctl00$ContentPlaceHolder1$btnConsultar")){
+                    element.InvokeMember("Click");
+                }
             }
             //Em testes
             /*string enterScript = @"javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions('ctl00$ContentPlaceHolder1$btnConsultar', '', true, 'completa', '', false, false))";
             page.Document.InvokeScript("eval", new object[] { enterScript });*/
         }
+
+        private void SetError(int errorCode)
+        {
+            HtmlDocument htmldoc = page.Document;
+            HtmlElementCollection htmlElementCollection = htmldoc.GetElementsByTagName("div");
+            foreach(HtmlElement element in htmlElementCollection)
+            {
+                if(element.GetAttribute("id") == "ctl00_ContentPlaceHolder1_vdsErros")
+                {
+                    HtmlElementCollection childLI = element.All;
+                    foreach(HtmlElement li in childLI)
+                    {
+                        if(li.GetElementsByTagName("li") != null)
+                        {
+                            string[] Errors = { "O campo Chave de Acesso é obrigatório." , "O campo Código da Imagem é obrigatório.", "O campo Código da Imagem deve ter 6 caracteres.", "Código da Imagem inválido. Tente novamente.", "Chave de acesso inválida. A chave de acesso deve ter 44 dígitos."};
+
+                            switch (errorCode)
+                            {
+                                case 0:
+                                    if(li.InnerText == Errors[0])
+                                    {
+                                        MessageBox.Show(Errors[0]);
+                                    }
+                                    break;
+                                case 1:
+                                    if (li.InnerText == Errors[1])
+                                    {
+                                        MessageBox.Show(Errors[1]);
+                                    }
+                                    break;
+                                case 2:
+                                    if (li.InnerText == Errors[2])
+                                    {
+                                        MessageBox.Show(Errors[2]);
+                                    }
+                                    break;
+                                case 3:
+                                    if (li.InnerText == Errors[3])
+                                    {
+                                        MessageBox.Show(Errors[3]);
+                                    }
+                                    break;
+                                case 4:
+                                    if (li.InnerText == Errors[4])
+                                    {
+                                        MessageBox.Show(Errors[4]);
+                                    }
+                                    break;
+                            }
+
+                        } 
+                    }
+                }
+            }
+        }
+
+
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -146,7 +222,9 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            checkAKey(textBox1.Text);
+            EnterSite();
+            checkKey(textBox1);
+            checkCaptcha(textBox2);
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
