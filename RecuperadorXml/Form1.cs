@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,7 +16,7 @@ namespace WindowsFormsApplication1
     {
         private string imgUrl = "";
         private string nfeUrl = "http://www.nfe.fazenda.gov.br/portal/consulta.aspx?tipoConsulta=completa&tipoConteudo=XbSeqxE8pl8=";
-
+        private bool IsInvalid = false;
         public Form1()
         {
             InitializeComponent();
@@ -155,19 +156,23 @@ namespace WindowsFormsApplication1
 
         private void SetError(int errorCode)
         {
+            string[] Errors = { "O campo Chave de Acesso é obrigatório.", "O campo Código da Imagem é obrigatório.", "O campo Código da Imagem deve ter 6 caracteres.", "Código da Imagem inválido. Tente novamente.", "Chave de acesso inválida. A chave de acesso deve ter 44 dígitos." };
+
+
             HtmlDocument htmldoc = page.Document;
-            HtmlElementCollection htmlElementCollection = htmldoc.GetElementsByTagName("div");
-            foreach(HtmlElement element in htmlElementCollection)
+            HtmlElementCollection htmlDivCollection =  htmldoc.GetElementsByTagName("div");
+            
+
+            foreach(HtmlElement element in htmlDivCollection)
             {
-                if(element.GetAttribute("id") == "ctl00_ContentPlaceHolder1_vdsErros")
+              if (element.GetAttribute("id") == "ctl00_ContentPlaceHolder1_vdsErros")
                 {
                     HtmlElementCollection childLI = element.All;
                     foreach(HtmlElement li in childLI)
                     {
+
                         if(li.GetElementsByTagName("li") != null)
                         {
-                            string[] Errors = { "O campo Chave de Acesso é obrigatório." , "O campo Código da Imagem é obrigatório.", "O campo Código da Imagem deve ter 6 caracteres.", "Código da Imagem inválido. Tente novamente.", "Chave de acesso inválida. A chave de acesso deve ter 44 dígitos."};
-
                             switch (errorCode)
                             {
                                 case 0:
@@ -188,12 +193,6 @@ namespace WindowsFormsApplication1
                                         MessageBox.Show(Errors[2]);
                                     }
                                     break;
-                                case 3:
-                                    if (li.InnerText == Errors[3])
-                                    {
-                                        MessageBox.Show(Errors[3]);
-                                    }
-                                    break;
                                 case 4:
                                     if (li.InnerText == Errors[4])
                                     {
@@ -208,7 +207,10 @@ namespace WindowsFormsApplication1
             }
         }
 
+        private void DownloadXML()
+        {
 
+        }
 
         private void label1_Click(object sender, EventArgs e)
         {
