@@ -16,7 +16,6 @@ namespace WindowsFormsApplication1
     {
         private string imgUrl = "";
         private string nfeUrl = "http://www.nfe.fazenda.gov.br/portal/consulta.aspx?tipoConsulta=completa&tipoConteudo=XbSeqxE8pl8=";
-        private bool IsInvalid = false;
         public Form1()
         {
             InitializeComponent();
@@ -209,7 +208,17 @@ namespace WindowsFormsApplication1
 
         private void DownloadXML()
         {
+            if(page.ReadyState == WebBrowserReadyState.Loading)
+                HtmlDocument htmldoc = page.Document;
+                HtmlElementCollection elements = htmldoc.All;
 
+                foreach (HtmlElement element in elements)
+                {
+                if(element.Name.Equals("ctl00$ContentPlaceHolder1$btnDownload"))
+                    Console.WriteLine(element.Name);
+                }
+            
+            
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -227,6 +236,7 @@ namespace WindowsFormsApplication1
             EnterSite();
             checkKey(textBox1);
             checkCaptcha(textBox2);
+            DownloadXML();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
