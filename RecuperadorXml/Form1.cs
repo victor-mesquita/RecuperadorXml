@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace WindowsFormsApplication1
 {
@@ -221,9 +222,48 @@ namespace WindowsFormsApplication1
                 }
         }
 
-        private void RenameXml(string xml)
+        private void RenameXml()
         {
+            string[] arquivos = Directory.GetFiles("C:\\asatransf\\temp");
+            string xNome = "";
+            string NF = "";
 
+            foreach(string xmls in arquivos)
+            {
+                 while (Path.GetExtension(xmls) == ".xml" && File.Exists(xmls))
+                    {
+                        XmlDocument xmlDoc = new XmlDocument();
+                        xmlDoc.Load(xmls); //Carregando o arquivo
+
+                        XmlNodeList fornecedores = xmlDoc.GetElementsByTagName("emit");
+
+                        foreach(XmlNode fornecedor in fornecedores)
+                        {
+                        string nomeF = fornecedor["xNome"].InnerText;
+
+                        if(nomeF.Equals("Distribuidora de Medicamentos Santa Cruz Ltda Fl.16"))
+                        {
+                            xNome = "santa";
+                        }
+                        else
+                        {
+                            xNome = nomeF.Substring(0, 6).ToLower();
+                        }
+                        }
+
+                        XmlNodeList notas = xmlDoc.GetElementsByTagName("ide");
+                           foreach(XmlNode nota in notas)
+                        {
+                            NF = nota["nNF"].InnerText;
+                        }
+
+                    File.Move(xmls, "C:\\asatransf\\" + xNome + "" + NF+".xml");
+                    }
+
+            }
+
+
+            
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -270,6 +310,11 @@ namespace WindowsFormsApplication1
                     ele.SetAttribute("value", textBox2.Text);
                 }
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            RenameXml();
         }
     }
 }
