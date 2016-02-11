@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace WindowsFormsApplication1
     public partial class Form1 : Form
     {
         private string imgUrl = "";
+        private bool afterDownload = false;
         private string nfeUrl = "http://www.nfe.fazenda.gov.br/portal/consulta.aspx?tipoConsulta=completa&tipoConteudo=XbSeqxE8pl8=";
         public Form1()
         {
@@ -45,13 +47,13 @@ namespace WindowsFormsApplication1
         private void Form1_Load(object sender, EventArgs e)
         {
             page.Navigate(nfeUrl);
-            
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             clearScr();
             GetCaptcha();
+            afterDownload = false;
         }
 
 
@@ -206,19 +208,22 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private void DownloadXML()
+        private void DownloadXML(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            if(page.ReadyState == WebBrowserReadyState.Loading)
-                HtmlDocument htmldoc = page.Document;
+            HtmlDocument htmldoc = page.Document;
                 HtmlElementCollection elements = htmldoc.All;
 
                 foreach (HtmlElement element in elements)
                 {
-                if(element.Name.Equals("ctl00$ContentPlaceHolder1$btnDownload"))
-                    Console.WriteLine(element.Name);
+                if (element.Name.Equals("ctl00$ContentPlaceHolder1$btnDownload"))
+                    element.InvokeMember("Click");
+                    afterDownload = true;
                 }
-            
-            
+        }
+
+        private void RenameXml(string xml)
+        {
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -236,7 +241,7 @@ namespace WindowsFormsApplication1
             EnterSite();
             checkKey(textBox1);
             checkCaptcha(textBox2);
-            DownloadXML();
+            page.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(DownloadXML);
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
