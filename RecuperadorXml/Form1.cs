@@ -54,6 +54,7 @@ namespace WindowsFormsApplication1
         {
             page.Navigate(nfeUrl);
             //page.ScriptErrorsSuppressed = true;
+           
             
         }
 
@@ -270,14 +271,13 @@ namespace WindowsFormsApplication1
                     File.Move(xmls, "C:\\asatransf\\" + xNome + "" + NF+".xml");
                     MessageBox.Show("Arquivos tratados com sucesso!", "Recuperador de XML", MessageBoxButtons.OK, MessageBoxIcon.Information) ;
                     }
-
-                if ((Directory.GetFiles(temp) == null || Directory.GetFiles(temp).Length == 0)){
-                    MessageBox.Show("Nenhum arquivo para ser tratado", "Recuperador de XML", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
             }
 
+            if ((Directory.GetFiles(temp) == null || Directory.GetFiles(temp).Length == 0))
+            {
+                MessageBox.Show("Nenhum arquivo para ser tratado", "Recuperador de XML", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
 
-            
         }
 
         private void label1_Click(object sender, EventArgs e)
