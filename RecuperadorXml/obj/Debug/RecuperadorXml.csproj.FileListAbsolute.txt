@@ -25,3 +25,7 @@ C:\Users\henrique\Source\Repos\RecuperadorXml\RecuperadorXml\obj\Debug\Recuperad
 C:\Users\henrique\Source\Repos\RecuperadorXml\RecuperadorXml\obj\Debug\WindowsFormsApplication1.Form1.resources
 C:\Users\henrique\Source\Repos\RecuperadorXml\RecuperadorXml\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
 C:\Users\henrique\Source\Repos\RecuperadorXml\RecuperadorXml\obj\Debug\RecuperadorXml.csproj.GenerateResource.Cache
+C:\Users\Admin\Source\Repos\RecuperadorXml 3.5\RecuperadorXml\bin\Debug\WindowsFormsApplication1.exe.config
+C:\Users\Admin\Source\Repos\RecuperadorXml 3.5\RecuperadorXml\obj\Debug\WindowsFormsApplication1.exe
+C:\Users\Admin\Source\Repos\RecuperadorXml 3.5\RecuperadorXml\obj\Debug\WindowsFormsApplication1.pdb
+C:\Users\Admin\Source\Repos\RecuperadorXml 3.5\RecuperadorXml\bin\Debug\RecupedaroXML.exe.config

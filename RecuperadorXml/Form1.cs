@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -28,15 +29,19 @@ namespace WindowsFormsApplication1
         {
             if (page.ReadyState == WebBrowserReadyState.Complete)
             {
+                string captcha, captcha1;
                 HtmlDocument htmldoc = page.Document;
-                HtmlElementCollection htmlElementCollection = htmldoc.Images;
+                HtmlElementCollection htmlElementCollection = htmldoc.All;
                 foreach (HtmlElement ele in htmlElementCollection)
                 {
-
                     if (ele.Id == "ctl00_ContentPlaceHolder1_imgCaptcha")
                     {
-                        imgUrl = ele.GetAttribute("src");
+                        /*imgUrl = ele.GetAttribute("src");
                         imgUrl = imgUrl.Substring(22, imgUrl.Length - 22);
+                        pictureBox1.Image = Base64ToImage(imgUrl);*/
+                        captcha1 = ele.OuterHtml;
+                        captcha = captcha1.Substring(177, captcha1.Length - 177);
+                        imgUrl = captcha.Substring(0, captcha.Length - 2);
                         pictureBox1.Image = Base64ToImage(imgUrl);
 
                     }
@@ -48,6 +53,8 @@ namespace WindowsFormsApplication1
         private void Form1_Load(object sender, EventArgs e)
         {
             page.Navigate(nfeUrl);
+            //page.ScriptErrorsSuppressed = true;
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -133,6 +140,8 @@ namespace WindowsFormsApplication1
             if(page.Url.ToString() != nfeUrl)
                 page.Navigate(nfeUrl);
 
+            textBox1.Text = "";
+            textBox2.Text = "";
             
         }
 
@@ -224,7 +233,8 @@ namespace WindowsFormsApplication1
 
         private void RenameXml()
         {
-            string[] arquivos = Directory.GetFiles("C:\\asatransf\\temp");
+            string temp = "C:\\asatransf\\temp";
+            string[] arquivos = Directory.GetFiles(temp);
             string xNome = "";
             string NF = "";
 
@@ -258,8 +268,12 @@ namespace WindowsFormsApplication1
                         }
 
                     File.Move(xmls, "C:\\asatransf\\" + xNome + "" + NF+".xml");
+                    MessageBox.Show("Arquivos tratados com sucesso!", "Recuperador de XML", MessageBoxButtons.OK, MessageBoxIcon.Information) ;
                     }
 
+                if ((Directory.GetFiles(temp) == null || Directory.GetFiles(temp).Length == 0)){
+                    MessageBox.Show("Nenhum arquivo para ser tratado", "Recuperador de XML", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
 
 
