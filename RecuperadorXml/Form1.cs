@@ -262,15 +262,12 @@ namespace WindowsFormsApplication1
                     File.Move(xmls, "C:\\asatransf\\" + xNome + "" + NF+".xml");
                     MessageBox.Show("Arquivos tratados com sucesso!", "Recuperador de XML", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-
-                if ((Directory.GetFiles(temp) == null || Directory.GetFiles(temp).Length == 0))
-                {
-                    MessageBox.Show("Nenhum arquivo para ser tratado", "Recuperador de XML", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-
             }
 
-
+            if ((Directory.GetFiles(temp) == null || Directory.GetFiles(temp).Length == 0))
+             {
+               MessageBox.Show("Nenhum arquivo para ser tratado", "Recuperador de XML", MessageBoxButtons.OK, MessageBoxIcon.Information);
+             }
             
         }
 
