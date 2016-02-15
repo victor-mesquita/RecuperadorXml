@@ -133,7 +133,8 @@ namespace WindowsFormsApplication1
             if(page.Url.ToString() != nfeUrl)
                 page.Navigate(nfeUrl);
 
-            
+            textBox1.Text = "";
+            textBox2.Text = "";
         }
 
         private void EnterSite()
@@ -224,7 +225,8 @@ namespace WindowsFormsApplication1
 
         private void RenameXml()
         {
-            string[] arquivos = Directory.GetFiles("C:\\asatransf\\temp");
+            string temp = "C:\\asatransf\\temp";
+            string[] arquivos = Directory.GetFiles(temp);
             string xNome = "";
             string NF = "";
 
@@ -258,7 +260,13 @@ namespace WindowsFormsApplication1
                         }
 
                     File.Move(xmls, "C:\\asatransf\\" + xNome + "" + NF+".xml");
+                    MessageBox.Show("Arquivos tratados com sucesso!", "Recuperador de XML", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
+
+                if ((Directory.GetFiles(temp) == null || Directory.GetFiles(temp).Length == 0))
+                {
+                    MessageBox.Show("Nenhum arquivo para ser tratado", "Recuperador de XML", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
 
             }
 
