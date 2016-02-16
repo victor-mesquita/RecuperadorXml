@@ -85,7 +85,6 @@
             this.label1.Size = new System.Drawing.Size(86, 13);
             this.label1.TabIndex = 6;
             this.label1.Text = "Número da nota ";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // textBox2
             // 
@@ -103,7 +102,6 @@
             this.label2.Size = new System.Drawing.Size(107, 13);
             this.label2.TabIndex = 8;
             this.label2.Text = "Digite o valor ao lado";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // button3
             // 

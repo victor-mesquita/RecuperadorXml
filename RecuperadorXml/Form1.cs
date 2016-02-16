@@ -1,24 +1,15 @@
-﻿using Microsoft.Win32;
+﻿using RecupedaroXML;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading;
 using System.Windows.Forms;
-using System.Xml;
 
 namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
         private string imgUrl = "";
-        private bool afterDownload = false;
+        private XMLTool xmlt;
         private string nfeUrl = "http://www.nfe.fazenda.gov.br/portal/consulta.aspx?tipoConsulta=completa&tipoConteudo=XbSeqxE8pl8=";
         public Form1()
         {
@@ -27,6 +18,7 @@ namespace WindowsFormsApplication1
 
         private void Load_Captcha(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
+          
             if (page.ReadyState == WebBrowserReadyState.Complete)
             {
                 string captcha, captcha1;
@@ -53,16 +45,13 @@ namespace WindowsFormsApplication1
         private void Form1_Load(object sender, EventArgs e)
         {
             page.Navigate(nfeUrl);
-            //page.ScriptErrorsSuppressed = true;
-           
-            
+            xmlt = new XMLTool(page);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             clearScr();
             GetCaptcha();
-            afterDownload = false;
         }
 
 
@@ -219,83 +208,12 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private void DownloadXML(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-            HtmlDocument htmldoc = page.Document;
-                HtmlElementCollection elements = htmldoc.All;
-
-                foreach (HtmlElement element in elements)
-                {
-                if (element.Name.Equals("ctl00$ContentPlaceHolder1$btnDownload"))
-                    element.InvokeMember("Click");
-                    afterDownload = true;
-                }
-        }
-
-        private void RenameXml()
-        {
-            string temp = "C:\\asatransf\\temp";
-            string[] arquivos = Directory.GetFiles(temp);
-            string xNome = "";
-            string NF = "";
-
-            foreach(string xmls in arquivos)
-            {
-                 while (Path.GetExtension(xmls) == ".xml" && File.Exists(xmls))
-                    {
-                        XmlDocument xmlDoc = new XmlDocument();
-                        xmlDoc.Load(xmls); //Carregando o arquivo
-
-                        XmlNodeList fornecedores = xmlDoc.GetElementsByTagName("emit");
-
-                        foreach(XmlNode fornecedor in fornecedores)
-                        {
-                        string nomeF = fornecedor["xNome"].InnerText;
-
-                        if(nomeF.Equals("Distribuidora de Medicamentos Santa Cruz Ltda Fl.16"))
-                        {
-                            xNome = "santa";
-                        }
-                        else
-                        {
-                            xNome = nomeF.Substring(0, 6).ToLower();
-                        }
-                        }
-
-                        XmlNodeList notas = xmlDoc.GetElementsByTagName("ide");
-                           foreach(XmlNode nota in notas)
-                        {
-                            NF = nota["nNF"].InnerText;
-                        }
-
-                    File.Move(xmls, "C:\\asatransf\\" + xNome + "" + NF+".xml");
-                    MessageBox.Show("Arquivos tratados com sucesso!", "Recuperador de XML", MessageBoxButtons.OK, MessageBoxIcon.Information) ;
-                    }
-            }
-
-            if ((Directory.GetFiles(temp) == null || Directory.GetFiles(temp).Length == 0))
-            {
-                MessageBox.Show("Nenhum arquivo para ser tratado", "Recuperador de XML", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             EnterSite();
             checkKey(textBox1);
             checkCaptcha(textBox2);
-            page.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(DownloadXML);
+            page.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(xmlt.DownloadXML);
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -328,7 +246,7 @@ namespace WindowsFormsApplication1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            RenameXml();
+            xmlt.RenameXml();
         }
     }
 }

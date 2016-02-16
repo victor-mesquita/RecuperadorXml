@@ -7,8 +7,8 @@
     <ProjectGuid>{91C168B5-D67A-4C44-B0F1-CF4CE36F1E3E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RecupedaroXML</RootNamespace>
-    <AssemblyName>RecupedaroXML</AssemblyName>
+    <RootNamespace>RecuperadorXML</RootNamespace>
+    <AssemblyName>RecuperadorXML</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -60,6 +60,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XMLTool.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
