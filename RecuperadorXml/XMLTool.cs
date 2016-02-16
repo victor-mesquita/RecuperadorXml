@@ -10,12 +10,11 @@ namespace RecupedaroXML
 {
     class XMLTool
     {
-        WebBrowser _page = null;
+        private WebBrowser page { get; set; }
 
         public XMLTool(WebBrowser page)
         {
-            if (_page == null)
-                _page = page;
+            this.page = page;
         }
 
         public void RenameXml()
@@ -68,14 +67,24 @@ namespace RecupedaroXML
 
         public void DownloadXML(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            HtmlDocument htmldoc = _page.Document;
-            HtmlElementCollection elements = htmldoc.All;
+            HtmlDocument htmldoc = page.Document;
+            HtmlElementCollection elements = htmldoc.GetElementsByTagName("input");
 
             foreach (HtmlElement element in elements)
             {
+                bool downloadBtn = false;
+
                 if (element.Name.Equals("ctl00$ContentPlaceHolder1$btnDownload"))
                 {
+                    //element.InvokeMember("Click");
+                    downloadBtn = true;
+                }
+
+                if (downloadBtn)
+                {
+                    downloadBtn = false;
                     element.InvokeMember("Click");
+                    
                 }
                     
             }
