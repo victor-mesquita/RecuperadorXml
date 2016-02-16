@@ -28,9 +28,6 @@ namespace WindowsFormsApplication1
                 {
                     if (ele.Id == "ctl00_ContentPlaceHolder1_imgCaptcha")
                     {
-                        /*imgUrl = ele.GetAttribute("src");
-                        imgUrl = imgUrl.Substring(22, imgUrl.Length - 22);
-                        pictureBox1.Image = Base64ToImage(imgUrl);*/
                         captcha1 = ele.OuterHtml;
                         captcha = captcha1.Substring(177, captcha1.Length - 177);
                         imgUrl = captcha.Substring(0, captcha.Length - 2);
@@ -72,24 +69,6 @@ namespace WindowsFormsApplication1
         //Obtem o captcha
         private void GetCaptcha()
         {
-            /*
-            if (page.ReadyState == WebBrowserReadyState.Complete)
-            {
-                HtmlDocument htmldoc = (HtmlDocument)page.Document;
-                HtmlElementCollection htmlElementCollection = htmldoc.Images;
-                foreach (HtmlElement ele in htmlElementCollection)
-                {
-
-                    if (ele.Id == "ctl00_ContentPlaceHolder1_imgCaptcha")
-                    {
-                        imgUrl = ele.GetAttribute("src");
-                        imgUrl = imgUrl.Substring(22, imgUrl.Length - 22);
-                        pictureBox1.Image = Base64ToImage(imgUrl);
-
-                    }
-                }
-
-            }*/
             string ReloadScript = @"javascript:__doPostBack('ctl00$ContentPlaceHolder1$hlkAlterarCaptcha','')";
 
             page.Document.InvokeScript("eval", new object[] { ReloadScript });
@@ -141,18 +120,11 @@ namespace WindowsFormsApplication1
             HtmlElementCollection htmlElementCollection = htmldoc.GetElementsByTagName("input");
             foreach (HtmlElement element in htmlElementCollection)
             {
-                /*if(ele.GetAttribute("name") == "ctl00$ContentPlaceHolder1$btnConsultar")
-                {
-                    ele.InvokeMember("submit");
-                }*/
                 Console.WriteLine(element.Name);
                 if (element.Name.Equals("ctl00$ContentPlaceHolder1$btnConsultar")){
                     element.InvokeMember("Click");
                 }
             }
-            //Em testes
-            /*string enterScript = @"javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions('ctl00$ContentPlaceHolder1$btnConsultar', '', true, 'completa', '', false, false))";
-            page.Document.InvokeScript("eval", new object[] { enterScript });*/
         }
 
         private void SetError(int errorCode)
