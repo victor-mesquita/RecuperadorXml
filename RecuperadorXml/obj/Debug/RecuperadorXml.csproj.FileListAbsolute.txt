@@ -34,3 +34,4 @@ C:\Users\Admin\Source\Repos\RecuperadorXml 3.5\RecuperadorXml\bin\Debug\Recupera
 C:\Users\Admin\Source\Repos\RecuperadorXml 3.5\RecuperadorXml\obj\Debug\RecuperadorXML.Properties.Resources.resources
 C:\Users\Admin\Source\Repos\RecuperadorXml 3.5\RecuperadorXml\obj\Debug\RecuperadorXML.exe
 C:\Users\Admin\Source\Repos\RecuperadorXml 3.5\RecuperadorXml\obj\Debug\RecuperadorXML.pdb
+C:\Users\henrique\Source\Repos\RecuperadorXml2\RecuperadorXml\bin\Debug\RecuperadorXML.exe.config

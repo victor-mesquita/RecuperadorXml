@@ -6,11 +6,12 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 
-namespace RecupedaroXML
+namespace RecuperadorXML
 {
     class XMLTool
     {
         private WebBrowser page { get; set; }
+        private string nfeUrl { get; set; }
 
         public XMLTool(WebBrowser page)
         {
@@ -72,22 +73,19 @@ namespace RecupedaroXML
 
             foreach (HtmlElement element in elements)
             {
-                bool downloadBtn = false;
 
                 if (element.Name.Equals("ctl00$ContentPlaceHolder1$btnDownload"))
                 {
-                    //element.InvokeMember("Click");
-                    downloadBtn = true;
-                }
-
-                if (downloadBtn)
-                {
-                    downloadBtn = false;
                     element.InvokeMember("Click");
+                    page.FileDownload += new EventHandler(Page_DownloadFile);
                     
-                }
-                    
+                }  
             }
+        }
+
+        private void Page_DownloadFile(object sender, EventArgs e)
+        {
+            page.Navigate("about:blank");
         }
     }
 }

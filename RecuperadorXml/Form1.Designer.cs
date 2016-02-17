@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication1
+﻿namespace RecuperadorXML
 {
     partial class Form1
     {
