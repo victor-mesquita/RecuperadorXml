@@ -54,24 +54,6 @@ namespace RecuperadorXML
             util.GetCaptcha();
         }
 
-        private void clearScr()
-        {
-            if (label2.Text != "Digite o valor ao lado")
-            {
-                label2.ForeColor = Color.Black;
-                label2.Text = "Digite o valor ao lado";
-            }
-
-            if (page.Url.ToString() != nfeUrl)
-                page.Navigate(nfeUrl);
-
-            textBox1.Text = "";
-            textBox2.Text = "";
-
-        }
-
-
-
         private void button1_Click(object sender, EventArgs e)
         {
             util.EnterSite();
