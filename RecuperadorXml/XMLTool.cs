@@ -77,15 +77,8 @@ namespace RecuperadorXML
                 if (element.Name.Equals("ctl00$ContentPlaceHolder1$btnDownload"))
                 {
                     element.InvokeMember("Click");
-                    page.FileDownload += new EventHandler(Page_DownloadFile);
-                    
                 }  
             }
-        }
-
-        private void Page_DownloadFile(object sender, EventArgs e)
-        {
-            page.Navigate("about:blank");
         }
     }
 }

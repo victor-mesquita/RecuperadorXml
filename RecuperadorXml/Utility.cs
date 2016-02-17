@@ -70,7 +70,7 @@ namespace RecuperadorXML
 
 
         //Limpa todos os campos e verifica se a url está correta
-        public void ClearScr(Label l1, TextBox t1, TextBox t2, PictureBox cpt)
+        public void ClearScr(Label l1, TextBox t1, TextBox t2)
         {
 
             //Limpa o label de erros
@@ -90,14 +90,6 @@ namespace RecuperadorXML
                 t1.Text = "";
                 t1.Text = "";
             }
-            
-            //Limpa a picturebox e logo em seguida obtem um novo captcha se já disponivel
-            if(cpt.Image != null)
-            {
-                cpt.Dispose();
-                cpt.Image = null;
-            }
-
         }
 
         //Obtem o elemento/button e executa um 'Click'(action)
