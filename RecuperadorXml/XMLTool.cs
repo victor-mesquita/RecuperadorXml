@@ -68,6 +68,9 @@ namespace RecuperadorXML
 
         public void DownloadXML(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
+            if (e.Url.AbsolutePath != (sender as WebBrowser).Url.AbsolutePath)
+                return;
+
             HtmlDocument htmldoc = page.Document;
             HtmlElementCollection elements = htmldoc.GetElementsByTagName("input");
 

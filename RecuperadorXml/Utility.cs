@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace RecuperadorXML
@@ -16,6 +13,7 @@ namespace RecuperadorXML
         public Utility(WebBrowser page, string nfeUrl)
         {
             this.page = page;
+            this.nfeUrl = nfeUrl;
         }
 
 
@@ -36,7 +34,6 @@ namespace RecuperadorXML
         public void GetCaptcha()
         {
             string ReloadScript = @"javascript:__doPostBack('ctl00$ContentPlaceHolder1$hlkAlterarCaptcha','')";
-
             page.Document.InvokeScript("eval", new object[] { ReloadScript });
 
         }
@@ -69,7 +66,13 @@ namespace RecuperadorXML
         }
 
 
-        //Limpa todos os campos e verifica se a url está correta
+
+        /// <summary>
+        /// Limpa todos os campos e verifica se a url está correta
+        /// </summary>
+        /// <param name="l1">Label1</param>
+        /// <param name="t1">Textbox1/Chave</param>
+        /// <param name="t2">Textbo2/Captcha</param>
         public void ClearScr(Label l1, TextBox t1, TextBox t2)
         {
 
@@ -88,7 +91,7 @@ namespace RecuperadorXML
             if(t1.Text != "" || t1.Text != "")
             {
                 t1.Text = "";
-                t1.Text = "";
+                t2.Text = "";
             }
         }
 

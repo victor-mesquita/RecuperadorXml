@@ -49,8 +49,7 @@ namespace RecuperadorXML
 
         private void button2_Click(object sender, EventArgs e)
         {
-            util.ClearScr(label2, textBox1, textBox2, pictureBox1);
-
+            util.ClearScr(label2, textBox1, textBox2);
             util.GetCaptcha();
         }
 
