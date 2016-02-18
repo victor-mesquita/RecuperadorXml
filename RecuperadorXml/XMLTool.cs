@@ -12,7 +12,7 @@ namespace RecuperadorXML
     {
         private WebBrowser page { get; set; }
         private string nfeUrl { get; set; }
-
+        
         public XMLTool(WebBrowser page)
         {
             this.page = page;
@@ -65,23 +65,26 @@ namespace RecuperadorXML
             }
 
         }
-
         public void DownloadXML(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            if (e.Url.AbsolutePath != (sender as WebBrowser).Url.AbsolutePath)
-                return;
-
-            HtmlDocument htmldoc = page.Document;
-            HtmlElementCollection elements = htmldoc.GetElementsByTagName("input");
-
-            foreach (HtmlElement element in elements)
+            this.page.Document.Window.AttachEventHandler("onload", delegate
             {
-
-                if (element.Name.Equals("ctl00$ContentPlaceHolder1$btnDownload"))
+                System.Threading.SynchronizationContext.Current.Post(delegate
                 {
-                    element.InvokeMember("Click");
-                }  
-            }
+                    HtmlDocument htmldoc = page.Document;
+                    HtmlElementCollection elements = htmldoc.GetElementsByTagName("input");
+
+                    foreach (HtmlElement element in elements)
+                    {
+
+                        if (element.Name.Equals("ctl00$ContentPlaceHolder1$btnDownload"))
+                        {
+                            element.InvokeMember("Click");
+                        }
+                    }
+                }, null);
+            });
+            //((WebBrowser)sender).Dispose();
         }
     }
 }

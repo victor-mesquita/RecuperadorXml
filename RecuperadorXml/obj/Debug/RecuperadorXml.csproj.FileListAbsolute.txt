@@ -7,14 +7,7 @@ C:\Users\Admin\Documents\Visual Studio 2015\Projects\RecuperadorXml\RecuperadorX
 C:\Users\Admin\Documents\Visual Studio 2015\Projects\RecuperadorXml\RecuperadorXml\obj\Debug\WindowsFormsApplication1.Form1.resources
 C:\Users\Admin\Documents\Visual Studio 2015\Projects\RecuperadorXml\RecuperadorXml\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
 C:\Users\Admin\Documents\Visual Studio 2015\Projects\RecuperadorXml\RecuperadorXml\obj\Debug\RecuperadorXml.csproj.GenerateResource.Cache
-C:\Users\Admin\Source\Repos\RecuperadorXml\RecuperadorXml\bin\Debug\WindowsFormsApplication1.exe.config
-C:\Users\Admin\Source\Repos\RecuperadorXml\RecuperadorXml\obj\Debug\WindowsFormsApplication1.exe
-C:\Users\Admin\Source\Repos\RecuperadorXml\RecuperadorXml\obj\Debug\WindowsFormsApplication1.pdb
-C:\Users\Admin\Source\Repos\RecuperadorXml\RecuperadorXml\bin\Debug\WindowsFormsApplication1.exe
-C:\Users\Admin\Source\Repos\RecuperadorXml\RecuperadorXml\bin\Debug\WindowsFormsApplication1.pdb
 C:\Users\Admin\Source\Repos\RecuperadorXml\RecuperadorXml\obj\Debug\RecuperadorXml.csprojResolveAssemblyReference.cache
-C:\Users\Admin\Source\Repos\RecuperadorXml\RecuperadorXml\obj\Debug\WindowsFormsApplication1.Form1.resources
-C:\Users\Admin\Source\Repos\RecuperadorXml\RecuperadorXml\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
 C:\Users\Admin\Source\Repos\RecuperadorXml\RecuperadorXml\obj\Debug\RecuperadorXml.csproj.GenerateResource.Cache
 C:\Users\henrique\Source\Repos\RecuperadorXml\RecuperadorXml\bin\Debug\WindowsFormsApplication1.exe.config
 C:\Users\henrique\Source\Repos\RecuperadorXml\RecuperadorXml\obj\Debug\WindowsFormsApplication1.exe
@@ -35,3 +28,10 @@ C:\Users\Admin\Source\Repos\RecuperadorXml 3.5\RecuperadorXml\obj\Debug\Recupera
 C:\Users\Admin\Source\Repos\RecuperadorXml 3.5\RecuperadorXml\obj\Debug\RecuperadorXML.exe
 C:\Users\Admin\Source\Repos\RecuperadorXml 3.5\RecuperadorXml\obj\Debug\RecuperadorXML.pdb
 C:\Users\henrique\Source\Repos\RecuperadorXml2\RecuperadorXml\bin\Debug\RecuperadorXML.exe.config
+C:\Users\Admin\Source\Repos\RecuperadorXml\RecuperadorXml\bin\Debug\RecuperadorXML.exe.config
+C:\Users\Admin\Source\Repos\RecuperadorXml\RecuperadorXml\bin\Debug\RecuperadorXML.exe
+C:\Users\Admin\Source\Repos\RecuperadorXml\RecuperadorXml\bin\Debug\RecuperadorXML.pdb
+C:\Users\Admin\Source\Repos\RecuperadorXml\RecuperadorXml\obj\Debug\RecuperadorXML.Form1.resources
+C:\Users\Admin\Source\Repos\RecuperadorXml\RecuperadorXml\obj\Debug\RecuperadorXML.Properties.Resources.resources
+C:\Users\Admin\Source\Repos\RecuperadorXml\RecuperadorXml\obj\Debug\RecuperadorXML.exe
+C:\Users\Admin\Source\Repos\RecuperadorXml\RecuperadorXml\obj\Debug\RecuperadorXML.pdb

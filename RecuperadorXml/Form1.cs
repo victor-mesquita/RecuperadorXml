@@ -11,6 +11,7 @@ namespace RecuperadorXML
         private XMLTool xmlt;
         private Utility util;
         private string nfeUrl = "http://www.nfe.fazenda.gov.br/portal/consulta.aspx?tipoConsulta=completa&tipoConteudo=XbSeqxE8pl8=";
+        private string ConsultaCompleta = "http://www.nfe.fazenda.gov.br/portal/consultaCompleta.aspx?tipoConteudo=XbSeqxE8pl8=";
 
         public Form1()
         {
@@ -59,6 +60,8 @@ namespace RecuperadorXML
             util.CheckKey(textBox1);
             util.CheckCaptcha(textBox2);
             page.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(xmlt.DownloadXML);
+            
+            
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
