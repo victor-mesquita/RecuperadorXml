@@ -57,7 +57,7 @@ namespace RecuperadorXML
                             }
                             else
                             {
-                                xNome = nomeF.Substring(0, 6).ToLower();
+                                xNome = nomeF.Substring(0, 6).ToLower().Trim();
                             }
                         }
 
@@ -67,7 +67,7 @@ namespace RecuperadorXML
                             NF = nota["nNF"].InnerText;
                         }
 
-                        File.Move(xmls, "C:\\asatransf\\" + xNome.Trim() + "" + NF + ".xml");
+                        File.Move(xmls, "C:\\asatransf\\" + xNome + "" + NF + ".xml");
                         tratado = true;
                 }
             }
